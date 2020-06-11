@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- * Class that gives access to the different DAO interfaces {@link AccountDao}, {@link TransactionDao} and {@link UserDao}
+ * Class that gives access to the different DAO interfaces: {@link AccountDao}, {@link TransactionDao} and {@link UserDao}
  */
 @Named("daoFactory")
 public class DaoFactoryImpl implements DaoFactory {

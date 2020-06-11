@@ -27,17 +27,33 @@ public class AccountResource extends AbstractResource {
 
     @GET
     @Path("{accountNumber}")
-    public void get(@PathParam("accountNumber") String accountNumber) throws NotFoundException, TooManyResultsException, ServletException, IOException {
-        AccountManager accountManager = getManagerFactory().getAccountManager();
-        Account account = accountManager.getAccountByNumber(accountNumber);
+    public void getAccount(@PathParam("accountNumber") String accountNumber) {
+        Account account = getSelectedAccount(accountNumber);
+        putAccountInSessionAndRedirect(account);
+    }
 
-        ServletContext context = getContext();
-        RequestDispatcher rd = context.getRequestDispatcher("/account.jsp");
+    private Account getSelectedAccount(String accountNumber) {
+        try {
+            AccountManager accountManager = getManagerFactory().getAccountManager();
+            Account account = accountManager.getAccountByNumber(accountNumber);
 
-        HttpServletRequest request = getRequest();
-        HttpSession session = request.getSession();
-        session.setAttribute("selectedAccount", account);
+            return account;
+        } catch (NotFoundException | TooManyResultsException e) {
+            return null;
+        }
+    }
 
-        rd.forward(request, getResponse());
+    private void putAccountInSessionAndRedirect(Account account) {
+        try {
+            ServletContext context = getContext();
+            RequestDispatcher rd = context.getRequestDispatcher("/account.jsp");
+
+            HttpServletRequest request = getRequest();
+            HttpSession session = request.getSession();
+            session.setAttribute("selectedAccount", account);
+
+            rd.forward(request, getResponse());
+        } catch (ServletException | IOException e) {
+        }
     }
 }

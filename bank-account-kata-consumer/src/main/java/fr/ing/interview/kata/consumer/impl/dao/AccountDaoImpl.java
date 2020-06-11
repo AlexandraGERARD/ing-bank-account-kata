@@ -10,6 +10,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -23,7 +27,7 @@ public class AccountDaoImpl extends AbstractDaoImpl implements AccountDao {
 
     @Override
     public List<Account> getAccountsListByUser(Integer userId) throws DataAccessException {
-        String query = "SELECT ACCOUNT_NUMBER, USER_ID, BALANCE FROM DB_ACCOUNT WHERE USER_ID = ?";
+        String query = "SELECT ACCOUNT_NUMBER, USER_ID, BALANCE FROM DB_ACCOUNT WHERE USER_ID = ? ORDER BY ACCOUNT_NUMBER ASC";
 
         JdbcTemplate template = new JdbcTemplate(getDataSource());
 
@@ -38,7 +42,6 @@ public class AccountDaoImpl extends AbstractDaoImpl implements AccountDao {
 
         JdbcTemplate template = new JdbcTemplate(getDataSource());
 
-
         List<Account> accountsList = template.query(query, new Object[]{accountNumber}, accountRowMapper);
 
         if (accountsList.isEmpty()) {
@@ -51,5 +54,22 @@ public class AccountDaoImpl extends AbstractDaoImpl implements AccountDao {
 
         Account account = accountsList.get(0);
         return account;
+    }
+
+    @Override
+    public void updateBalance(String accountNumber, double balance) {
+        StringBuilder query = new StringBuilder("UPDATE DB_ACCOUNT SET BALANCE = ");
+        query.append(balance);
+        query.append(" WHERE ACCOUNT_NUMBER = '");
+        query.append(accountNumber).append("'");
+
+        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/DB_BANK",
+                "postgres", "admin"); Statement stmt = conn.createStatement()) {
+            Class.forName("org.postgresql.Driver");
+
+            stmt.executeUpdate(query.toString());
+        } catch (SQLException | ClassNotFoundException e) {
+            //
+        }
     }
 }

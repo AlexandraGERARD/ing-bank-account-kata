@@ -15,4 +15,6 @@ public interface AccountDao {
     List<Account> getAccountsListByUser(Integer userId);
 
     Account getAccountByNumber(String accountNumber) throws NotFoundException, TooManyResultsException;
+
+    void updateBalance(String accountNumber, double balance);
 }

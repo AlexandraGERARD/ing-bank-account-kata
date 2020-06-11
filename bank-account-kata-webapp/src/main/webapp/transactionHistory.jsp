@@ -39,4 +39,8 @@
 </center>
 <br/>
 <br/>
-<center><input type="submit" value="Retour" onclick="javascript:window.history.back();"/></center>
+<center>
+    <form action="../../../rest/account/<%=account.getAccountNumber()%>" method="get">
+        <input type="submit" value="Retour"/>
+    </form>
+</center>

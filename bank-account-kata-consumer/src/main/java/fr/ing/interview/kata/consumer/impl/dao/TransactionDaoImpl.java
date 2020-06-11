@@ -7,6 +7,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,5 +33,25 @@ public class TransactionDaoImpl extends AbstractDaoImpl implements TransactionDa
         List<Transaction> transactionList = template.query(query, new Object[]{accountNumber}, transactionRowMapper);
 
         return transactionList;
+    }
+
+    @Override
+    public void createTransaction(String accountNumber, double amount) {
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formater.format(new Date());
+
+        StringBuilder query = new StringBuilder("INSERT INTO DB_TRANSACTION (ACCOUNT_NUMBER, AMOUNT, DATE) VALUES ('");
+        query.append(accountNumber).append("', ");
+        query.append(amount).append(", '");
+        query.append(dateString).append("')");
+
+        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/DB_BANK",
+                "postgres", "admin"); Statement stmt = conn.createStatement()) {
+            Class.forName("org.postgresql.Driver");
+
+            stmt.executeUpdate(query.toString());
+        } catch (SQLException | ClassNotFoundException e) {
+            //
+        }
     }
 }

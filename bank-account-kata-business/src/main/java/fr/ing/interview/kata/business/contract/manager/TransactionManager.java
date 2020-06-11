@@ -11,4 +11,6 @@ import java.util.List;
 public interface TransactionManager {
 
     List<Transaction> getTransactionsListByAccount(String accountNumber);
+
+    void createTransaction(String accountNumber, double amount);
 }

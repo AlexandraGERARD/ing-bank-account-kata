@@ -28,4 +28,10 @@ public class AccountManagerImpl extends AbstractManager implements AccountManage
         Account account = accountdao.getAccountByNumber(accountNumber);
         return account;
     }
+
+    @Override
+    public void updateBalance(String accountNumber, double balance) {
+        AccountDao accountdao = getDaoFactory().getAccountDao();
+        accountdao.updateBalance(accountNumber, balance);
+    }
 }

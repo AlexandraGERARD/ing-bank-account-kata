@@ -17,12 +17,33 @@
                     <h3>Le solde de votre compte est de <%=balance%> €.</h3>
                     <br/>
                     <br/>
-                    <form action="balance/<%=accountNumber%>" method="post" style="width: 450px;margin-left: auto;margin-right: auto">
-                        <input type="submit" value="Consulter le solde de mon compte" style="width:350px"/>
-                    </form>
-                    <br/>
-                    <br/>
-                    <input type="submit" value="Déposer/Retirer de l'argent" style="width:350px" onclick="location.href='../addWithdraw.jsp"/>
+
+                    <table>
+                        <tr>
+                            <td style="border:1; border-style:inset; padding:20px">
+                                <center>
+                                    <h3>Effectuer un crédit</h3>
+                                    <form action="add" method="post">
+                                        <input type="text" name="amount" pattern="(\d+\.?\d{1,2})" style="text-align:right"/> €
+                                        <br/>
+                                        <br/>
+                                        <input type="submit" value="Valider" />
+                                    </form>
+                                </center>
+                            </td>
+                            <td style="border:1; border-style:inset; padding:20px">
+                                <center>
+                                    <h3>Effectuer un débit</h3>
+                                    <form action="withdraw" method="post">
+                                        <input type="text" name="amount" pattern="(\d+\.?\d{1,2})" style="text-align:right"/> €
+                                        <br/>
+                                        <br/>
+                                        <input type="submit" value="Valider" />
+                                    </form>
+                                </center>
+                            </td>
+                        </tr>
+                    </table>
                 </center>
             </td>
         </tr>
@@ -30,4 +51,8 @@
 </center>
 <br/>
 <br/>
-<center><input type="submit" value="Retour" onclick="javascript:window.history.back();"/></center>
+<center>
+    <form action="../../../rest/account/<%=accountNumber%>" method="get">
+        <input type="submit" value="Retour"/>
+    </form>
+</center>

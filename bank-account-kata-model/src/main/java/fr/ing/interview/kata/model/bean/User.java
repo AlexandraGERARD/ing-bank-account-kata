@@ -2,7 +2,6 @@ package fr.ing.interview.kata.model.bean;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * A user of the application

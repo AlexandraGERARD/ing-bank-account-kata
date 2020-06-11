@@ -31,14 +31,32 @@ public class UserResource extends AbstractResource {
 
     @POST
     @Path("/login")
-    public void get(@FormParam("login") String login, @FormParam("password") String password) throws ServletException, IOException, NotFoundException, TooManyResultsException {
+    public void getUser(@FormParam("login") String login, @FormParam("password") String password)  {
+        try {
+            User user = getSelectedUser(login, password);
+            List<Account> userAccounts = getUserAccounts(user.getUserId());
+            user.setAccountsList(userAccounts);
+
+            putUserInSessionAndRedirect(user);
+        } catch (NotFoundException | TooManyResultsException | ServletException | IOException e) {
+        }
+    }
+
+    private User getSelectedUser(String login, String password) throws NotFoundException, TooManyResultsException {
         UserManager userManager = getManagerFactory().getUserManager();
-        AccountManager accountManager = getManagerFactory().getAccountManager();
-
         User user = userManager.getUser(login, password);
-        List<Account> userAccounts = accountManager.getAccountsListByUser(user.getUserId());
-        user.setAccountsList(userAccounts);
 
+        return user;
+    }
+
+    private List<Account> getUserAccounts(Integer id) {
+        AccountManager accountManager = getManagerFactory().getAccountManager();
+        List<Account> userAccounts = accountManager.getAccountsListByUser(id);
+
+        return userAccounts;
+    }
+
+    private void putUserInSessionAndRedirect(User user) throws ServletException, IOException {
         HttpServletResponse response = getResponse();
         getResponse().setHeader("Access-Control-Allow-Credentials", "true");
 

@@ -1,7 +1,5 @@
 package fr.ing.interview.kata.model.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -11,7 +9,7 @@ public class Transaction {
 
     private Date date;
 
-    private double amount;
+    private Double amount;
 
     private Integer transactionId;
 
@@ -34,11 +32,11 @@ public class Transaction {
         this.date = date;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

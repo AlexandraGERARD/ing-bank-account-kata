@@ -3,8 +3,9 @@
 <%@ include file="header.jsp" %>
 
 <%
+    User user = (User) request.getSession().getAttribute("selectedUser");
     Account account = (Account) request.getSession().getAttribute("selectedAccount");
-    double balance = account.getBalance();
+    String accountNumber = account.getAccountNumber();
 %>
 
 <center>
@@ -31,4 +32,11 @@
 </center>
 <br/>
 <br/>
-<center><input type="submit" value="Retour" onclick="javascript:window.history.back();"/></center>
+
+<center>
+    <form action="../rest/user/login" method="post">
+        <input type="hidden" name="login" value="<%=user.getLogin()%>"
+        <input type="hidden" name="login" value="<%=user.getPassword()%>"
+        <input type="submit" value="Retour"/>
+    </form>
+</center>

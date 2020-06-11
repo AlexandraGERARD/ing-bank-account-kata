@@ -6,7 +6,6 @@ import fr.ing.interview.kata.model.exception.NotFoundException;
 import fr.ing.interview.kata.model.exception.TooManyResultsException;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Interface of the class {@link AccountManagerImpl}
@@ -16,4 +15,6 @@ public interface AccountManager {
     List<Account> getAccountsListByUser(Integer userId);
 
     Account getAccountByNumber(String accountNumber) throws NotFoundException, TooManyResultsException;
+
+    void updateBalance(String accountNumber, double balance);
 }

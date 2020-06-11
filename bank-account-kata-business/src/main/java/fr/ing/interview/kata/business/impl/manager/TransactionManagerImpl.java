@@ -19,4 +19,10 @@ public class TransactionManagerImpl extends AbstractManager implements Transacti
         List<Transaction> listOfTransactions = transactionDao.getTransactionsListByAccount(accountNumber);
         return listOfTransactions;
     }
+
+    @Override
+    public void createTransaction(String accountNumber, double amount) {
+        TransactionDao transactionDao = getDaoFactory().getTransactionDao();
+        transactionDao.createTransaction(accountNumber, amount);
+    }
 }

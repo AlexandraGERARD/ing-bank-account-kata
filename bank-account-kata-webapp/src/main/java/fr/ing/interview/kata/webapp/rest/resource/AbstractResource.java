@@ -10,7 +10,7 @@ import javax.ws.rs.core.Context;
 /**
  * Abstract class that gives access to the {@link ManagerFactoryImpl}
  */
-public abstract class AbstractResource{
+public abstract class AbstractResource {
 
     @Context
     private HttpServletRequest request;
