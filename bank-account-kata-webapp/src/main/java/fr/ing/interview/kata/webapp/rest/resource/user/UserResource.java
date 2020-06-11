@@ -13,6 +13,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -45,7 +46,8 @@ public class UserResource extends AbstractResource {
         RequestDispatcher rd = context.getRequestDispatcher("/menu.jsp");
 
         HttpServletRequest request = getRequest();
-        request.setAttribute("user", user);
+        HttpSession session = request.getSession();
+        session.setAttribute("selectedUser", user);
 
         rd.forward(request, response);
     }

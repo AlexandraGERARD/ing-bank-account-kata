@@ -1,13 +1,10 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 
-<%@page import="fr.ing.interview.kata.model.bean.Account"%>
-
 <%@ include file="header.jsp" %>
 
 <%
-    Account account = (Account) request.getAttribute("selectedAccount");
+    Account account = (Account) request.getSession().getAttribute("selectedAccount");
     double balance = account.getBalance();
-    String accountNumber = account.getAccountNumber();
 %>
 
 <center>
@@ -16,13 +13,17 @@
             <td style="border:1; border-style:inset; padding:40px">
                 <center>
                     <h2>Vous consultez le compte n° <%=accountNumber%></h2>
-                    <h3>Le solde de votre compte est de <%=balance%> €.</h2>
+                    <h3>Le solde de votre compte est de <%=account.getBalance()%> €.</h3>
                     <br/>
                     <br/>
-                    <input type="submit" value="Consulter l'historiques de mes transactions" style="width:350px" onclick="location.href='../../transactionHistory.jsp'"/>
+                    <form action="../../rest/transaction/list/<%=accountNumber%>" method="get">
+                        <input type="submit" value="Consulter l'historique de mes transactions" style="width:350px"/>
+                    </form>
                     <br/>
                     <br/>
-                    <input type="submit" value="Déposer/Retirer de l'argent" style="width:350px" onclick="location.href='../../addWithdrawMoney.jsp"/>
+                    <form action="../../rest/transaction/addWithdraw/<%=accountNumber%>" method="get">
+                        <input type="submit" value="Déposer/Retirer de l'argent" style="width:350px"/>
+                    </form
                 </center>
             </td>
         </tr>

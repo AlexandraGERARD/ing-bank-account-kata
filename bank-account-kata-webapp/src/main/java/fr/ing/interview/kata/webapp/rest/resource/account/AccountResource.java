@@ -10,6 +10,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -34,7 +35,8 @@ public class AccountResource extends AbstractResource {
         RequestDispatcher rd = context.getRequestDispatcher("/account.jsp");
 
         HttpServletRequest request = getRequest();
-        request.setAttribute("selectedAccount", account);
+        HttpSession session = request.getSession();
+        session.setAttribute("selectedAccount", account);
 
         rd.forward(request, getResponse());
     }

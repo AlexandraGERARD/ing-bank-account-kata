@@ -1,0 +1,17 @@
+table#transactions,  table#transactions tr{
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+table#transactions tr{
+  text-align: center;
+}
+
+table#transactions td{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+table#transactions{
+ width:300px;
+}

@@ -13,7 +13,7 @@ import javax.inject.Named;
 import java.util.List;
 
 /**
- * Class that communicates with the database (table ACCOUNT)
+ * Class that communicates with the database (table DB_ACCOUNT)
  */
 @Named("accountDao")
 public class AccountDaoImpl extends AbstractDaoImpl implements AccountDao {

@@ -16,11 +16,6 @@ public class User {
 
     private List<Account> accountsList = new ArrayList<>();
 
-    //--------------------- METHODS ---------------------//
-    public void addAccount(Account account) {
-        accountsList.add(account);
-    }
-
     //----------------- GETTERS/SETTERS -----------------//
     public String getLogin() {
         return login;

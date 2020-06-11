@@ -1,5 +1,8 @@
 package fr.ing.interview.kata.model.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The bank account of a user
  */
@@ -9,15 +12,9 @@ public class Account {
 
     private Integer userId;
 
+    private List<Transaction> transactionsList = new ArrayList<>();
+
     private String accountNumber;
-
-    //--------------------- METHODS ---------------------//
-    public Account() {
-    }
-
-    public Account(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
 
     //----------------- GETTERS/SETTERS -----------------//
     public void setAccountNumber(String accountNumber) {
@@ -42,5 +39,13 @@ public class Account {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public List<Transaction> getTransactionsList() {
+        return transactionsList;
+    }
+
+    public void setTransactionsList(List<Transaction> transactionsList) {
+        this.transactionsList = transactionsList;
     }
 }
