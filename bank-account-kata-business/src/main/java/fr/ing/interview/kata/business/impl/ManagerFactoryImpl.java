@@ -9,6 +9,9 @@ import fr.ing.interview.kata.business.contract.manager.UserManager;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+/**
+ * Class that gives access to the different managers: {@link AccountManager}, {@link TransactionManager} and {@link UserManager}
+ */
 @Named("managerFactory")
 public class ManagerFactoryImpl implements ManagerFactory {
 
@@ -21,6 +24,7 @@ public class ManagerFactoryImpl implements ManagerFactory {
     @Inject
     private UserManager userManager;
 
+    //----------------- GETTERS/SETTERS -----------------//
     @Override
     public AccountManager getAccountManager(){
         return this.accountManager;

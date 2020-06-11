@@ -8,6 +8,9 @@ import fr.ing.interview.kata.consumer.contract.dao.UserDao;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+/**
+ * Class that gives access to the different DAO interfaces {@link AccountDao}, {@link TransactionDao} and {@link UserDao}
+ */
 @Named("daoFactory")
 public class DaoFactoryImpl implements DaoFactory {
 
@@ -20,6 +23,7 @@ public class DaoFactoryImpl implements DaoFactory {
     @Inject
     private UserDao userDao;
 
+    //----------------- GETTERS/SETTERS -----------------//
     @Override
     public AccountDao getAccountDao() {
         return accountDao;

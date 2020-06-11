@@ -1,26 +1,42 @@
 package fr.ing.interview.kata.consumer.impl.dao;
 
 import fr.ing.interview.kata.consumer.contract.dao.UserDao;
+import fr.ing.interview.kata.consumer.impl.mapper.UserRowMapper;
 import fr.ing.interview.kata.model.bean.User;
+import fr.ing.interview.kata.model.exception.NotFoundException;
+import fr.ing.interview.kata.model.exception.TooManyResultsException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
 
 /**
- * Class that communicates with the database (table USER)
+ * Class that communicates with the database (table DB_USER)
  */
-@Named
+@Named("userDao")
 public class UserDaoImpl extends AbstractDaoImpl implements UserDao {
 
+    @Inject
+    UserRowMapper userRowMapper;
+
     @Override
-    public User getByLoginAndPassword(String login, String password){
-        String query = "SElECT * FROM USER WHERE LOGIN = ? AND PASSWORD = ?";
+    public User getByLoginAndPassword(String login, String password) throws NotFoundException, TooManyResultsException {
+        String query = "SELECT USER_ID, LOGIN, PASSWORD FROM DB_USER WHERE LOGIN = ? AND PASSWORD = ?";
 
         JdbcTemplate template = new JdbcTemplate(getDataSource());
 
-        User user = template.queryForObject(query,
-                User.class, login, password);
+        List<User> usersList = template.query(query, new Object[]{login, password}, userRowMapper);
 
+        if (usersList.isEmpty()) {
+            throw new NotFoundException();
+        }
+
+        if (usersList.size() > 1) {
+            throw new TooManyResultsException();
+        }
+
+        User user = usersList.get(0);
         return user;
     }
 }

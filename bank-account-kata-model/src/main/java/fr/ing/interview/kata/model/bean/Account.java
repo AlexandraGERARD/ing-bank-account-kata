@@ -1,22 +1,17 @@
 package fr.ing.interview.kata.model.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 /**
  * The bank account of a user
  */
-@Entity(name = "ACCOUNT")
 public class Account {
 
-    @Id
-    private String accountNumber;
-
-    @Column(name="BALANCE")
     private Double balance = 0.00;
 
-    //----------------- METHODS -----------------//
+    private Integer userId;
+
+    private String accountNumber;
+
+    //--------------------- METHODS ---------------------//
     public Account() {
     }
 
@@ -25,15 +20,27 @@ public class Account {
     }
 
     //----------------- GETTERS/SETTERS -----------------//
-    public Double getBalance() {
-        return balance;
-    }
-
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
     public String getAccountNumber() {
         return accountNumber;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

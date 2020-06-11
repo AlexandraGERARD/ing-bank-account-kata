@@ -1,21 +1,21 @@
 package fr.ing.interview.kata.webapp.rest.resource.account;
 
+import fr.ing.interview.kata.business.contract.manager.AccountManager;
+import fr.ing.interview.kata.model.bean.Account;
+import fr.ing.interview.kata.model.exception.NotFoundException;
+import fr.ing.interview.kata.model.exception.TooManyResultsException;
+import fr.ing.interview.kata.webapp.rest.resource.AbstractResource;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.ing.interview.kata.business.contract.manager.AccountManager;
-import fr.ing.interview.kata.model.bean.Account;
-import fr.ing.interview.kata.webapp.rest.resource.AbstractResource;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * REST resource for the {@link Account}.
@@ -25,31 +25,17 @@ import java.util.stream.Collectors;
 public class AccountResource extends AbstractResource {
 
     @GET
-    @Path("{id}")
-    //public Account get(@PathParam("id") Integer pId) throws NotFoundException {
-    public Account get(@PathParam("id") String pId) {
+    @Path("{accountNumber}")
+    public void get(@PathParam("accountNumber") String accountNumber) throws NotFoundException, TooManyResultsException, ServletException, IOException {
         AccountManager accountManager = getManagerFactory().getAccountManager();
-        Account account = accountManager.getAccount(pId);
-        return account;
-    }
+        Account account = accountManager.getAccountByNumber(accountNumber);
 
-    @GET
-    public List<String> get() throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
+        ServletContext context = getContext();
+        RequestDispatcher rd = context.getRequestDispatcher("/account.jsp");
 
-        AccountManager accountManager = getManagerFactory().getAccountManager();
-        List<Account> accountsList = accountManager.getAccountsList();
-        List<String> result = new ArrayList<>();
+        HttpServletRequest request = getRequest();
+        request.setAttribute("selectedAccount", account);
 
-        for(Account a : accountsList){
-            result.add(mapper.writeValueAsString(a));
-        }
-        return result;
-        //return "test";
-        //List<String> s = new ArrayList<>();
-        //s.add("a");
-        //s.add("b");
-
-        //return s;
+        rd.forward(request, getResponse());
     }
 }

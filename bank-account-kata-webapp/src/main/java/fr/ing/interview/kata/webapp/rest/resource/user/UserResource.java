@@ -1,12 +1,25 @@
 package fr.ing.interview.kata.webapp.rest.resource.user;
 
+import fr.ing.interview.kata.business.contract.manager.AccountManager;
 import fr.ing.interview.kata.business.contract.manager.UserManager;
+import fr.ing.interview.kata.model.bean.Account;
 import fr.ing.interview.kata.model.bean.User;
 import fr.ing.interview.kata.model.exception.NotFoundException;
+import fr.ing.interview.kata.model.exception.TooManyResultsException;
 import fr.ing.interview.kata.webapp.rest.resource.AbstractResource;
 
-import javax.ws.rs.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * REST resource for the {@link User}.
@@ -16,10 +29,24 @@ import javax.ws.rs.core.MediaType;
 public class UserResource extends AbstractResource {
 
     @POST
-    @Path("user")
-    public User get(@FormParam("login") String login, @FormParam("password") String password) {
+    @Path("/login")
+    public void get(@FormParam("login") String login, @FormParam("password") String password) throws ServletException, IOException, NotFoundException, TooManyResultsException {
         UserManager userManager = getManagerFactory().getUserManager();
+        AccountManager accountManager = getManagerFactory().getAccountManager();
+
         User user = userManager.getUser(login, password);
-        return user;
+        List<Account> userAccounts = accountManager.getAccountsListByUser(user.getUserId());
+        user.setAccountsList(userAccounts);
+
+        HttpServletResponse response = getResponse();
+        getResponse().setHeader("Access-Control-Allow-Credentials", "true");
+
+        ServletContext context = getContext();
+        RequestDispatcher rd = context.getRequestDispatcher("/menu.jsp");
+
+        HttpServletRequest request = getRequest();
+        request.setAttribute("user", user);
+
+        rd.forward(request, response);
     }
 }

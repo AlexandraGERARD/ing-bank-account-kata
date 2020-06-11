@@ -7,6 +7,6 @@ import javax.inject.Named;
 /**
  * Class that communicates with the database (table TRANSACTION)
  */
-@Named
+@Named("transactionDao")
 public class TransactionDaoImpl extends AbstractDaoImpl implements TransactionDao {
 }

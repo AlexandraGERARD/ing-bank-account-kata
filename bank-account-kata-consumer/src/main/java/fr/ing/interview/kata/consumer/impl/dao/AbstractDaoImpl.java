@@ -1,10 +1,9 @@
 package fr.ing.interview.kata.consumer.impl.dao;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.sql.DataSource;
+import javax.swing.tree.RowMapper;
 
 public abstract class AbstractDaoImpl {
 
@@ -12,6 +11,7 @@ public abstract class AbstractDaoImpl {
     @Named("dataSource")
     private DataSource dataSource;
 
+    //----------------- GETTERS/SETTERS -----------------//
     protected DataSource getDataSource() {
         return dataSource;
     }

@@ -1,12 +1,19 @@
 package fr.ing.interview.kata.business.contract.manager;
 
+import fr.ing.interview.kata.business.impl.manager.AccountManagerImpl;
 import fr.ing.interview.kata.model.bean.Account;
+import fr.ing.interview.kata.model.exception.NotFoundException;
+import fr.ing.interview.kata.model.exception.TooManyResultsException;
 
 import java.util.List;
+import java.util.Set;
 
+/**
+ * Interface of the class {@link AccountManagerImpl}
+ */
 public interface AccountManager {
 
-    Account getAccount(String pId);
+    List<Account> getAccountsListByUser(Integer userId);
 
-    List<Account> getAccountsList();
+    Account getAccountByNumber(String accountNumber) throws NotFoundException, TooManyResultsException;
 }

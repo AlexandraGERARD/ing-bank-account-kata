@@ -8,6 +8,7 @@
               username="postgres"
               password="admin"
               defaultAutoCommit="false"
+              default_schema="public"
               defaultTransactionIsolation="READ_COMMITTED"
               initialSize="1"
               maxTotal="30"
