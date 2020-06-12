@@ -57,15 +57,11 @@ public class TransactionResource extends AbstractResource {
 
     @POST
     @Path("addWithdraw/add")
-    public String add(@FormParam("amount") double amount) {
+    public void add(@FormParam("amount") double amount) {
         if (amount > 0.01) {
             Account account = getSelectedAccount();
             createTransactionAndUpdateBalance(account, amount);
-
-            return null;
         }
-
-        return "montant invalide";
     }
 
     @POST

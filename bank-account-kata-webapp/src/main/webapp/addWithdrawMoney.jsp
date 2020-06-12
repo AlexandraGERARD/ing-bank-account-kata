@@ -23,22 +23,24 @@
                             <td style="border:1; border-style:inset; padding:20px">
                                 <center>
                                     <h3>Effectuer un crédit</h3>
+                                    <p style="color:red">Montant minimum: 0.01€</p>
                                     <form action="add" method="post">
-                                        <input type="text" name="amount" pattern="[0-9]+([,.][0-9]{1,2})?" style="text-align:right"/> €
+                                        <input type="text" id="addAmount" pattern="[0-9]+([,.][0-9]{1,2})?" style="text-align:right;"/> <output style="color:black" visibility="visible" value="€"/>
                                         <br/>
                                         <br/>
-                                        <input type="submit" value="Valider" />
+                                        <input type="submit" value="Valider"/>
                                     </form>
                                 </center>
                             </td>
                             <td style="border:1; border-style:inset; padding:20px">
                                 <center>
                                     <h3>Effectuer un débit</h3>
+                                    <p style="color:red">Montant maximum: <%=balance%> €</p>
                                     <form action="withdraw" method="post">
-                                        <input type="text" name="amount" pattern="[0-9]+([,.][0-9]{1,2})?" style="text-align:right"/> €
+                                        <input type="text" id="withdrawAmount" pattern="[0-9]+([,.][0-9]{1,2})?" style="text-align:right"/> €
                                         <br/>
                                         <br/>
-                                        <input type="submit" value="Valider" />
+                                        <input type="submit" value="Valider"/>
                                     </form>
                                 </center>
                             </td>
