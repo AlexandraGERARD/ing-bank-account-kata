@@ -31,14 +31,14 @@ public class UserResource extends AbstractResource {
 
     @POST
     @Path("/login")
-    public void getUser(@FormParam("login") String login, @FormParam("password") String password)  {
+    public void getUser(@FormParam("login") String login, @FormParam("password") String password) {
         try {
             User user = getSelectedUser(login, password);
             List<Account> userAccounts = getUserAccounts(user.getUserId());
             user.setAccountsList(userAccounts);
 
             putUserInSessionAndRedirect(user);
-        } catch (NotFoundException | TooManyResultsException | ServletException | IOException e) {
+        } catch (ServletException | IOException | NotFoundException | TooManyResultsException e) {
         }
     }
 

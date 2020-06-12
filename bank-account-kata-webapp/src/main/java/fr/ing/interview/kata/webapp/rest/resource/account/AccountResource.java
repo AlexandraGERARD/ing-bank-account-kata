@@ -27,20 +27,16 @@ public class AccountResource extends AbstractResource {
 
     @GET
     @Path("{accountNumber}")
-    public void getAccount(@PathParam("accountNumber") String accountNumber) {
+    public void getAccount(@PathParam("accountNumber") String accountNumber) throws NotFoundException, TooManyResultsException {
         Account account = getSelectedAccount(accountNumber);
         putAccountInSessionAndRedirect(account);
     }
 
-    private Account getSelectedAccount(String accountNumber) {
-        try {
-            AccountManager accountManager = getManagerFactory().getAccountManager();
-            Account account = accountManager.getAccountByNumber(accountNumber);
+    private Account getSelectedAccount(String accountNumber) throws NotFoundException, TooManyResultsException {
+        AccountManager accountManager = getManagerFactory().getAccountManager();
+        Account account = accountManager.getAccountByNumber(accountNumber);
 
-            return account;
-        } catch (NotFoundException | TooManyResultsException e) {
-            return null;
-        }
+        return account;
     }
 
     private void putAccountInSessionAndRedirect(Account account) {

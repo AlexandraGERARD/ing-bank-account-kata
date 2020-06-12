@@ -88,7 +88,7 @@ public class TransactionResource extends AbstractResource {
 
         createTransaction(accountNumber, amount);
 
-        double newBalance = calculateNewBalance(account.getBalance(),amount);
+        double newBalance = calculateNewBalance(account.getBalance(), amount);
         updateAccountBalance(accountNumber, newBalance);
 
         account.setBalance(newBalance);
@@ -115,7 +115,7 @@ public class TransactionResource extends AbstractResource {
         return negativeNumber;
     }
 
-    private double calculateNewBalance(double initialBalance, double amount){
+    private double calculateNewBalance(double initialBalance, double amount) {
         BigDecimal initialBalanceAsBigDecimal = new BigDecimal(initialBalance);
         BigDecimal amountAsBigDecimal = new BigDecimal(amount);
         BigDecimal newBalanceAsBigDecimal = initialBalanceAsBigDecimal.add(amountAsBigDecimal);
