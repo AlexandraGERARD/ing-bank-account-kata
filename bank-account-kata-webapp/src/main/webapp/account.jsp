@@ -32,11 +32,10 @@
 </center>
 <br/>
 <br/>
-
 <center>
-    <form action="../rest/user/login" method="post">
-        <input type="hidden" name="login" value="<%=user.getLogin()%>"
-        <input type="hidden" name="login" value="<%=user.getPassword()%>"
+    <form action="../../rest/user/login" method="post">
+        <input type="hidden" name="login" value="<%=user.getLogin()%>"/>
+        <input type="hidden" name="password" value="<%=user.getPassword()%>"/>
         <input type="submit" value="Retour"/>
     </form>
 </center>
