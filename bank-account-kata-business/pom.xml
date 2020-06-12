@@ -13,12 +13,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>${project.parent.artifactId}-consumer</artifactId>
+            <groupId>fr.ing.interview</groupId>
+            <artifactId>bank-account-kata-consumer</artifactId>
         </dependency>
+
+        <!-- Spring -->
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>${project.parent.artifactId}-model</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
     </dependencies>
 </project>

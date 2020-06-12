@@ -3,23 +3,6 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="abstractManager" abstract="true">
-        <property name="daoFactory" ref="daoFactory"/>
-    </bean>
-
-    <bean id="accountManager" class="fr.ing.interview.kata.business.impl.manager.AccountManagerImpl"
-          parent="abstractManager"/>
-    <bean id="transactionManager" class="fr.ing.interview.kata.business.impl.manager.TransactionManagerImpl"
-          parent="abstractManager"/>
-    <bean id="userManager" class="fr.ing.interview.kata.business.impl.manager.UserManagerImpl"
-          parent="abstractManager"/>
-
-    <bean id="managerFactory" class="fr.ing.interview.kata.business.impl.ManagerFactoryImpl">
-        <property name="accountManager" ref="accountManager" />
-        <property name="transactionManager" ref="transactionManager" />
-        <property name="userManager" ref="userManager" />
-    </bean>
-
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetClass" value="fr.ing.interview.kata.webapp.rest.resource.AbstractResource"/>
         <property name="targetMethod" value="setManagerFactory"/>

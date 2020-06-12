@@ -3,15 +3,15 @@ package fr.ing.interview.kata.consumer.impl.mapper;
 import fr.ing.interview.kata.consumer.impl.extractor.AccountResultSetExtractor;
 import fr.ing.interview.kata.model.bean.Account;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Service;
 
-import javax.inject.Named;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
  * Class parsing a Row to a {@link Account}
  */
-@Named("accountRowMapper")
+@Service
 public class AccountRowMapper implements RowMapper<Account> {
 
     @Override

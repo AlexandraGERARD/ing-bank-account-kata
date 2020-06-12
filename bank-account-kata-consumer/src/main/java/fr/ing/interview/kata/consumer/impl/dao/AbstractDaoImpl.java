@@ -1,7 +1,8 @@
 package fr.ing.interview.kata.consumer.impl.dao;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
@@ -9,8 +10,8 @@ import javax.sql.DataSource;
  */
 public abstract class AbstractDaoImpl {
 
-    @Inject
-    @Named("dataSource")
+    @Autowired
+    @Resource
     private DataSource dataSource;
 
     //----------------- GETTERS/SETTERS -----------------//

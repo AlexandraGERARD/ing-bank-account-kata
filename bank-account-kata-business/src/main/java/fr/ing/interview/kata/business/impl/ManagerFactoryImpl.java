@@ -5,28 +5,27 @@ import fr.ing.interview.kata.business.contract.ManagerFactory;
 import fr.ing.interview.kata.business.contract.manager.AccountManager;
 import fr.ing.interview.kata.business.contract.manager.TransactionManager;
 import fr.ing.interview.kata.business.contract.manager.UserManager;
-
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Class that gives access to the different managers: {@link AccountManager}, {@link TransactionManager} and {@link UserManager}
  */
-@Named("managerFactory")
+@Component("managerFactory")
 public class ManagerFactoryImpl implements ManagerFactory {
 
-    @Inject
+    @Autowired
     private AccountManager accountManager;
 
-    @Inject
+    @Autowired
     private TransactionManager transactionManager;
 
-    @Inject
+    @Autowired
     private UserManager userManager;
 
     //----------------- GETTERS/SETTERS -----------------//
     @Override
-    public AccountManager getAccountManager(){
+    public AccountManager getAccountManager() {
         return this.accountManager;
     }
 

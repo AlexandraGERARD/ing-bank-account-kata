@@ -24,7 +24,7 @@
                                 <center>
                                     <h3>Effectuer un crédit</h3>
                                     <form action="add" method="post">
-                                        <input type="text" name="amount" pattern="(\d+\.?\d{1,2})" style="text-align:right"/> €
+                                        <input type="text" name="amount" pattern="[0-9]+([,.][0-9]{1,2})?" style="text-align:right"/> €
                                         <br/>
                                         <br/>
                                         <input type="submit" value="Valider" />
@@ -35,7 +35,7 @@
                                 <center>
                                     <h3>Effectuer un débit</h3>
                                     <form action="withdraw" method="post">
-                                        <input type="text" name="amount" pattern="(\d+\.?\d{1,2})" style="text-align:right"/> €
+                                        <input type="text" name="amount" pattern="[0-9]+([,.][0-9]{1,2})?" style="text-align:right"/> €
                                         <br/>
                                         <br/>
                                         <input type="submit" value="Valider" />

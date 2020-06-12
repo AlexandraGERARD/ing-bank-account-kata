@@ -5,13 +5,12 @@ import fr.ing.interview.kata.consumer.contract.dao.UserDao;
 import fr.ing.interview.kata.model.bean.User;
 import fr.ing.interview.kata.model.exception.NotFoundException;
 import fr.ing.interview.kata.model.exception.TooManyResultsException;
-
-import javax.inject.Named;
+import org.springframework.stereotype.Service;
 
 /**
  * Business class that communicates with the {@link UserDao}
  */
-@Named("userManager")
+@Service("userManager")
 public class UserManagerImpl extends AbstractManager implements UserManager {
 
     @Override

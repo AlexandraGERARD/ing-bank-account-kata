@@ -4,23 +4,22 @@ import fr.ing.interview.kata.consumer.contract.DaoFactory;
 import fr.ing.interview.kata.consumer.contract.dao.AccountDao;
 import fr.ing.interview.kata.consumer.contract.dao.TransactionDao;
 import fr.ing.interview.kata.consumer.contract.dao.UserDao;
-
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Class that gives access to the different DAO interfaces: {@link AccountDao}, {@link TransactionDao} and {@link UserDao}
  */
-@Named("daoFactory")
+@Component("daoFactory")
 public class DaoFactoryImpl implements DaoFactory {
 
-    @Inject
+    @Autowired
     private AccountDao accountDao;
 
-    @Inject
+    @Autowired
     private TransactionDao transactionDao;
 
-    @Inject
+    @Autowired
     private UserDao userDao;
 
     //----------------- GETTERS/SETTERS -----------------//

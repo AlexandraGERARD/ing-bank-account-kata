@@ -5,11 +5,10 @@ import fr.ing.interview.kata.consumer.impl.mapper.AccountRowMapper;
 import fr.ing.interview.kata.model.bean.Account;
 import fr.ing.interview.kata.model.exception.NotFoundException;
 import fr.ing.interview.kata.model.exception.TooManyResultsException;
-import org.springframework.dao.DataAccessException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -19,14 +18,14 @@ import java.util.List;
 /**
  * Class that communicates with the database (table DB_ACCOUNT)
  */
-@Named("accountDao")
+@Repository("accountDao")
 public class AccountDaoImpl extends AbstractDaoImpl implements AccountDao {
 
-    @Inject
+    @Autowired
     AccountRowMapper accountRowMapper;
 
     @Override
-    public List<Account> getAccountsListByUser(Integer userId) throws DataAccessException {
+    public List<Account> getAccountsListByUser(Integer userId) {
         String query = "SELECT ACCOUNT_NUMBER, USER_ID, BALANCE FROM DB_ACCOUNT WHERE USER_ID = ? ORDER BY ACCOUNT_NUMBER ASC";
 
         JdbcTemplate template = new JdbcTemplate(getDataSource());

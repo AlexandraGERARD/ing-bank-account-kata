@@ -5,19 +5,19 @@ import fr.ing.interview.kata.consumer.impl.mapper.UserRowMapper;
 import fr.ing.interview.kata.model.bean.User;
 import fr.ing.interview.kata.model.exception.NotFoundException;
 import fr.ing.interview.kata.model.exception.TooManyResultsException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.List;
 
 /**
  * Class that communicates with the database (table DB_USER)
  */
-@Named("userDao")
+@Repository("userDao")
 public class UserDaoImpl extends AbstractDaoImpl implements UserDao {
 
-    @Inject
+    @Autowired
     UserRowMapper userRowMapper;
 
     @Override

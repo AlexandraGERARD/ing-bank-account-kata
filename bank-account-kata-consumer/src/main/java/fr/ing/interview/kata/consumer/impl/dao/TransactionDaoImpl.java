@@ -3,10 +3,10 @@ package fr.ing.interview.kata.consumer.impl.dao;
 import fr.ing.interview.kata.consumer.contract.dao.TransactionDao;
 import fr.ing.interview.kata.consumer.impl.mapper.TransactionRowMapper;
 import fr.ing.interview.kata.model.bean.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -18,10 +18,10 @@ import java.util.List;
 /**
  * Class that communicates with the database (table DB_TRANSACTION)
  */
-@Named("transactionDao")
+@Repository("transactionDao")
 public class TransactionDaoImpl extends AbstractDaoImpl implements TransactionDao {
 
-    @Inject
+    @Autowired
     TransactionRowMapper transactionRowMapper;
 
     @Override

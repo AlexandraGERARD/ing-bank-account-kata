@@ -5,14 +5,14 @@ import fr.ing.interview.kata.consumer.contract.dao.AccountDao;
 import fr.ing.interview.kata.model.bean.Account;
 import fr.ing.interview.kata.model.exception.NotFoundException;
 import fr.ing.interview.kata.model.exception.TooManyResultsException;
+import org.springframework.stereotype.Service;
 
-import javax.inject.Named;
 import java.util.List;
 
 /**
  * Business class that communicates with the {@link AccountDao}
  */
-@Named("accountManager")
+@Service("accountManager")
 public class AccountManagerImpl extends AbstractManager implements AccountManager {
 
     @Override
